@@ -12,9 +12,9 @@ public class ThreadMonitor {
 			@Override
 			public void execute() throws Exception {
 				while(true) {
-					//Logger.log(TYPE.INFO, "ThreadMonitor is running");
-					//EventPool.list();
-					//Logger.log(TYPE.INFO, "Running threads: " + EventPool.activeThreadCount());
+					Logger.log(TYPE.INFO, "ThreadMonitor is running");
+					EventPool.list();
+					Logger.log(TYPE.INFO, "Running threads: " + EventPool.activeThreadCount());
 					Thread.sleep(4000);
 				}
 			}
