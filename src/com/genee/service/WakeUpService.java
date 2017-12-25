@@ -5,13 +5,12 @@ import java.io.IOException;
 import com.genee.event.Event;
 import com.genee.event.EventBus;
 import com.genee.event.EventPool;
-import com.genee.event.EventPool.Execution;
 import com.genee.event.EventType;
 import com.genee.utils.Util;
 import com.genee.utils.logging.Logger;
 import com.genee.utils.logging.Logger.TYPE;
-import com.genee.utils.speech.SphnixLiveSpeech;
 import com.genee.utils.speech.WakeUpSpeech;
+import com.genee.utils.stt.SphnixSpeech;
 
 public class WakeUpService implements Service {
 
@@ -23,7 +22,7 @@ public class WakeUpService implements Service {
 
 	public WakeUpService() {
 		try {
-			wakeUpSpeech = new SphnixLiveSpeech();
+			wakeUpSpeech = new SphnixSpeech();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -57,9 +56,7 @@ public class WakeUpService implements Service {
 
 	@Override
 	public void start() throws Exception {
-		EventPool.newAsyncProcess(this.getName(), "WakeUpSpeechListener", new Execution() {
-			@Override
-			public void execute() throws Exception {
+		EventPool.newAsyncProcess(this.getName(), "WakeUpSpeechListener", () -> {
 				wakeUpSpeech.startListening();
 				Event startListenEvent = new Event(getName(), EventType.LISTENING_WAKEUP_WORD);
 				eventBus.rise(startListenEvent);
@@ -73,7 +70,6 @@ public class WakeUpService implements Service {
 				Event wakeupEvent = new Event(getName(), EventType.WAKEUP_EVENT);
 				eventBus.rise(wakeupEvent);
 				shutDown();
-			}
 		});
 	}
 

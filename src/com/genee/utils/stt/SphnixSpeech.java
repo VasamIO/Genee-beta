@@ -1,17 +1,19 @@
-package com.genee.utils.speech;
+package com.genee.utils.stt;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
+import com.genee.utils.speech.WakeUpSpeech;
+
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 
-public class SphnixLiveSpeech implements WakeUpSpeech {
+public class SphnixSpeech implements WakeUpSpeech {
 
 	LiveSpeechRecognizer recognizer;
 	Configuration configuration;
 
-	public SphnixLiveSpeech() throws IOException {
+	public SphnixSpeech() throws IOException {
 		Logger cmRootLogger = Logger.getLogger("default.config");
 		cmRootLogger.setLevel(java.util.logging.Level.OFF);
 		String conFile = System.getProperty("java.util.logging.config.file");
