@@ -28,7 +28,7 @@ public class PollyDemo {
 
 	public PollyDemo(Region region) {
 		
-		BasicAWSCredentials awsCreds = new BasicAWSCredentials("AKIAJ7LRLLSHJUAREC4A", "mDqzmy/ki2gjQTVZJktruPnBEWKafCu68k6kX5jM");
+		BasicAWSCredentials awsCreds = new BasicAWSCredentials("API Key", "secrete");
 		polly =  AmazonPollyClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(awsCreds)).withRegion(region.getName()).build();
 		
 		DescribeVoicesRequest describeVoicesRequest = new DescribeVoicesRequest();
